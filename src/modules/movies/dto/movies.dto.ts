@@ -70,3 +70,9 @@ export class UpdateMoviesDto {
     @Max(5)
     rating: number;
 }
+
+export class FindMovieDto extends PageLimitDto {
+    @IsNotEmpty()
+    @IsString()
+    search: string;
+}

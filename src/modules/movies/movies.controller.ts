@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Query, Put, Delete, Param } from '@nestjs/common';
 import { MoviesService } from './movies.service';
-import { MovieIdDto, MoviesDto, PageLimitDto, UpdateMoviesDto } from './dto/movies.dto';
+import { FindMovieDto, MovieIdDto, MoviesDto, PageLimitDto, UpdateMoviesDto } from './dto/movies.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -9,6 +9,11 @@ export class MoviesController {
     @Get()
     async getMovies(@Query() query: PageLimitDto) {
         return await this.moviesService.getMovies(query);
+    }
+
+    @Get('/search')
+    async findMovies(@Query() query: FindMovieDto) {
+        return await this.moviesService.findMovies(query);
     }
 
     @Post()
