@@ -33,7 +33,9 @@ export class MoviesService {
 
     async updateMovie(param: MovieIdDto, body: UpdateMoviesDto) {
         try {
-            return await this.catModel.findByIdAndUpdate(param.movie_id, body, { new: true })
+            const result = await this.catModel.findByIdAndUpdate(param.movie_id, body, { new: true })
+            if(!result)  throw new HttpException('Movie not found',HttpStatus.NOT_FOUND);
+            return result
         }
         catch (err) {
             console.log(err);
@@ -44,7 +46,9 @@ export class MoviesService {
 
     async deleteMovie(param: MovieIdDto) {
         try {
-            this.catModel.findByIdAndUpdate(param.movie_id, { status: ActiveInactiveEnum.Inactive });
+            const result = this.catModel.findByIdAndUpdate(param.movie_id, { status: ActiveInactiveEnum.Inactive });
+            if(!result)  throw new HttpException('Movie not found',HttpStatus.NOT_FOUND);
+            return result
             return;
         }
         catch (err) {
