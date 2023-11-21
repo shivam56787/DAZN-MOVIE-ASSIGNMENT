@@ -7,7 +7,9 @@ import {
     Min,
     Max,
     IsOptional,
+    IsMongoId,
   } from 'class-validator';
+import { Types } from 'mongoose';
 
 export const DEFAULT_PAGE_LIMIT = 50;
 export const DEFAULT_PAGE = 1;
@@ -24,6 +26,7 @@ export class MoviesDto {
     @IsNotEmpty()
     streaming_link: string;
 
+    @IsOptional()
     @IsInt()
     @Min(1)
     @Max(5)
@@ -40,4 +43,30 @@ export class PageLimitDto {
     @Type(() => Number)
     @Min(1)
     limit?: number = DEFAULT_PAGE_LIMIT;
+}
+
+export class MovieIdDto {
+    @IsNotEmpty()
+    @IsMongoId()
+    movie_id: Types.ObjectId;
+}
+
+export class UpdateMoviesDto {
+    @IsOptional()
+    @IsString()
+    title: string;
+
+    @IsOptional()
+    @IsString()
+    genre: string;
+
+    @IsUrl({ protocols: ['https'] })
+    @IsOptional()
+    streaming_link: string;
+
+    @IsOptional()
+    @IsInt()
+    @Min(1)
+    @Max(5)
+    rating: number;
 }
