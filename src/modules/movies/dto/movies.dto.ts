@@ -10,6 +10,7 @@ import {
     IsMongoId,
   } from 'class-validator';
 import { Types } from 'mongoose';
+import { Authorized } from 'src/decorators/authorized.decorator';
 
 export const DEFAULT_PAGE_LIMIT = 50;
 export const DEFAULT_PAGE = 1;
